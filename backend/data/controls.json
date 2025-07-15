@@ -1,0 +1,377 @@
+[
+  {
+    "description": "创建一个圆形温度计，显示范围0-100°C，带有红色警告区域",
+    "code": "import React from 'react';\n\ninterface ThermometerProps {\n  value: number;\n  minValue?: number;\n  maxValue?: number;\n  unit?: string;\n  warningThreshold?: number;\n}\n\nexport const Thermometer: React.FC<ThermometerProps> = ({\n  value,\n  minValue = 0,\n  maxValue = 100,\n  unit = '°C',\n  warningThreshold = 80\n}) => {\n  const percentage = Math.min(100, Math.max(0, ((value - minValue) / (maxValue - minValue)) * 100));\n  const isWarning = value >= warningThreshold;\n  \n  const getColor = () => {\n    if (isWarning) return '#ff4d4f';\n    if (percentage > 75) return '#faad14';\n    if (percentage > 50) return '#52c41a';\n    return '#1890ff';\n  };\n\n  return (\n    <div style={{\n      display: 'flex',\n      alignItems: 'center',\n      justifyContent: 'center',\n      width: '120px',\n      height: '120px',\n      borderRadius: '50%',\n      border: `4px solid ${getColor()}`,\n      background: `conic-gradient(${getColor()} 0% ${percentage}%, #f0f0f0 ${percentage}% 100%)`,\n      position: 'relative'\n    }}>\n      <div style={{\n        width: '80px',\n        height: '80px',\n        borderRadius: '50%',\n        background: '#fff',\n        display: 'flex',\n        alignItems: 'center',\n        justifyContent: 'center',\n        fontWeight: 'bold',\n        color: getColor(),\n        fontSize: '16px'\n      }}>\n        {value}{unit}\n      </div>\n      {isWarning && (\n        <div style={{\n          position: 'absolute',\n          top: '-10px',\n          right: '10px',\n          width: '20px',\n          height: '20px',\n          borderRadius: '50%',\n          background: '#ff4d4f',\n          animation: 'pulse 1s infinite'\n        }} />\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"display:flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid #ff4d4f;background:conic-gradient(#ff4d4f 0% 25%, #faad14 25% 50%, #52c41a 50% 75%, #1890ff 75% 100%);position:relative;\">\n        <div style=\"width:80px;height:80px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#ff4d4f;font-size:16px;\">\n          25°C\n        </div>\n        <div style=\"position:absolute;top:-10px;right:10px;width:20px;height:20px;border-radius:50%;background:#ff4d4f;\"></div>\n      </div>",
+    "metadata": {
+      "name": "温度计控件",
+      "description": "创建一个圆形温度计，显示范围0-100°C，带有红色警告区域",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "当前温度值",
+          "defaultValue": 25
+        },
+        {
+          "name": "minValue",
+          "type": "number",
+          "required": false,
+          "description": "最小值",
+          "defaultValue": 0
+        },
+        {
+          "name": "maxValue",
+          "type": "number",
+          "required": false,
+          "description": "最大值",
+          "defaultValue": 100
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false,
+          "description": "温度单位",
+          "defaultValue": "°C"
+        },
+        {
+          "name": "warningThreshold",
+          "type": "number",
+          "required": false,
+          "description": "警告阈值",
+          "defaultValue": 80
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "simple",
+      "estimatedTime": 2551.3458590815653
+    },
+    "id": "d783e27f-2025-4d25-9bbc-ad1a42ea2d0b",
+    "createdAt": "2025-07-14T07:28:13.878Z",
+    "updatedAt": "2025-07-14T07:28:13.878Z"
+  },
+  {
+    "description": "制作一个LED指示灯阵列，8x8矩阵，支持颜色切换",
+    "code": "import React from 'react';\n\ninterface LEDArrayProps {\n  rows?: number;\n  cols?: number;\n  data: number[][];\n  colors?: string[];\n}\n\nexport const LEDArray: React.FC<LEDArrayProps> = ({\n  rows = 8,\n  cols = 8,\n  data,\n  colors = ['#ff4d4f', '#52c41a', '#1890ff', '#faad14']\n}) => {\n  const getLEDStyle = (value: number) => {\n    const isOn = value > 0;\n    const colorIndex = Math.min(value - 1, colors.length - 1);\n    const color = isOn ? colors[colorIndex] : '#333';\n    \n    return {\n      width: '20px',\n      height: '20px',\n      borderRadius: '50%',\n      background: color,\n      boxShadow: isOn ? `0 0 8px ${color}` : 'none',\n      transition: 'all 0.3s ease'\n    };\n  };\n\n  return (\n    <div style={{\n      display: 'grid',\n      gridTemplateColumns: `repeat(${cols}, 1fr)`,\n      gap: '4px',\n      width: `${cols * 24}px`,\n      padding: '8px',\n      background: '#1f1f1f',\n      borderRadius: '8px'\n    }}>\n      {Array.from({ length: rows }, (_, row) =>\n        Array.from({ length: cols }, (_, col) => (\n          <div\n            key={`${row}-${col}`}\n            style={getLEDStyle(data[row]?.[col] || 0)}\n          />\n        ))\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"display:grid;grid-template-columns:repeat(8,1fr);gap:4px;width:200px;padding:8px;background:#1f1f1f;border-radius:8px;\">\n        <div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#ff4d4f;box-shadow:0 0 8px #ff4d4f;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#1890ff;box-shadow:0 0 8px #1890ff;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#52c41a;box-shadow:0 0 8px #52c41a;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#1890ff;box-shadow:0 0 8px #1890ff;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#ff4d4f;box-shadow:0 0 8px #ff4d4f;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#ff4d4f;box-shadow:0 0 8px #ff4d4f;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#1890ff;box-shadow:0 0 8px #1890ff;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#ff4d4f;box-shadow:0 0 8px #ff4d4f;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#ff4d4f;box-shadow:0 0 8px #ff4d4f;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#52c41a;box-shadow:0 0 8px #52c41a;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#1890ff;box-shadow:0 0 8px #1890ff;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#1890ff;box-shadow:0 0 8px #1890ff;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#faad14;box-shadow:0 0 8px #faad14;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#333;box-shadow:none;\"></div><div style=\"width:20px;height:20px;border-radius:50%;background:#1890ff;box-shadow:0 0 8px #1890ff;\"></div>\n      </div>",
+    "metadata": {
+      "name": "LED指示灯阵列",
+      "description": "制作一个LED指示灯阵列，8x8矩阵，支持颜色切换",
+      "props": [
+        {
+          "name": "rows",
+          "type": "number",
+          "required": false,
+          "description": "行数",
+          "defaultValue": 8
+        },
+        {
+          "name": "cols",
+          "type": "number",
+          "required": false,
+          "description": "列数",
+          "defaultValue": 8
+        },
+        {
+          "name": "data",
+          "type": "number[][]",
+          "required": true,
+          "description": "LED状态数据",
+          "defaultValue": []
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "required": false,
+          "description": "颜色数组",
+          "defaultValue": [
+            "#ff4d4f",
+            "#52c41a",
+            "#1890ff"
+          ]
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "medium",
+      "estimatedTime": 2814.6677396436094
+    },
+    "id": "03202ef8-38f5-41dc-9c41-84f728d61d92",
+    "createdAt": "2025-07-14T07:35:47.238Z",
+    "updatedAt": "2025-07-14T07:35:47.239Z"
+  },
+  {
+    "description": "生成一个数字显示器，显示温度值，支持小数点",
+    "code": "import React from 'react';\n\ninterface ThermometerProps {\n  value: number;\n  minValue?: number;\n  maxValue?: number;\n  unit?: string;\n  warningThreshold?: number;\n}\n\nexport const Thermometer: React.FC<ThermometerProps> = ({\n  value,\n  minValue = 0,\n  maxValue = 100,\n  unit = '°C',\n  warningThreshold = 80\n}) => {\n  const percentage = Math.min(100, Math.max(0, ((value - minValue) / (maxValue - minValue)) * 100));\n  const isWarning = value >= warningThreshold;\n  \n  const getColor = () => {\n    if (isWarning) return '#ff4d4f';\n    if (percentage > 75) return '#faad14';\n    if (percentage > 50) return '#52c41a';\n    return '#1890ff';\n  };\n\n  return (\n    <div style={{\n      display: 'flex',\n      alignItems: 'center',\n      justifyContent: 'center',\n      width: '120px',\n      height: '120px',\n      borderRadius: '50%',\n      border: `4px solid ${getColor()}`,\n      background: `conic-gradient(${getColor()} 0% ${percentage}%, #f0f0f0 ${percentage}% 100%)`,\n      position: 'relative'\n    }}>\n      <div style={{\n        width: '80px',\n        height: '80px',\n        borderRadius: '50%',\n        background: '#fff',\n        display: 'flex',\n        alignItems: 'center',\n        justifyContent: 'center',\n        fontWeight: 'bold',\n        color: getColor(),\n        fontSize: '16px'\n      }}>\n        {value}{unit}\n      </div>\n      {isWarning && (\n        <div style={{\n          position: 'absolute',\n          top: '-10px',\n          right: '10px',\n          width: '20px',\n          height: '20px',\n          borderRadius: '50%',\n          background: '#ff4d4f',\n          animation: 'pulse 1s infinite'\n        }} />\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"display:flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid #ff4d4f;background:conic-gradient(#ff4d4f 0% 25%, #faad14 25% 50%, #52c41a 50% 75%, #1890ff 75% 100%);position:relative;\">\n        <div style=\"width:80px;height:80px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#ff4d4f;font-size:16px;\">\n          25°C\n        </div>\n        <div style=\"position:absolute;top:-10px;right:10px;width:20px;height:20px;border-radius:50%;background:#ff4d4f;\"></div>\n      </div>",
+    "metadata": {
+      "name": "温度计控件",
+      "description": "生成一个数字显示器，显示温度值，支持小数点",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "当前温度值",
+          "defaultValue": 25
+        },
+        {
+          "name": "minValue",
+          "type": "number",
+          "required": false,
+          "description": "最小值",
+          "defaultValue": 0
+        },
+        {
+          "name": "maxValue",
+          "type": "number",
+          "required": false,
+          "description": "最大值",
+          "defaultValue": 100
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false,
+          "description": "温度单位",
+          "defaultValue": "°C"
+        },
+        {
+          "name": "warningThreshold",
+          "type": "number",
+          "required": false,
+          "description": "警告阈值",
+          "defaultValue": 80
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "simple",
+      "estimatedTime": 3659.0578780380315
+    },
+    "id": "8066bf30-98d7-4ed7-b95f-a355e3ea004d",
+    "createdAt": "2025-07-14T07:36:13.164Z",
+    "updatedAt": "2025-07-14T07:36:13.164Z"
+  },
+  {
+    "description": "生成一个数字显示器，显示温度值，支持小数点",
+    "code": "import React from 'react';\n\ninterface ThermometerProps {\n  value: number;\n  minValue?: number;\n  maxValue?: number;\n  unit?: string;\n  warningThreshold?: number;\n}\n\nexport const Thermometer: React.FC<ThermometerProps> = ({\n  value,\n  minValue = 0,\n  maxValue = 100,\n  unit = '°C',\n  warningThreshold = 80\n}) => {\n  const percentage = Math.min(100, Math.max(0, ((value - minValue) / (maxValue - minValue)) * 100));\n  const isWarning = value >= warningThreshold;\n  \n  const getColor = () => {\n    if (isWarning) return '#ff4d4f';\n    if (percentage > 75) return '#faad14';\n    if (percentage > 50) return '#52c41a';\n    return '#1890ff';\n  };\n\n  return (\n    <div style={{\n      display: 'flex',\n      alignItems: 'center',\n      justifyContent: 'center',\n      width: '120px',\n      height: '120px',\n      borderRadius: '50%',\n      border: `4px solid ${getColor()}`,\n      background: `conic-gradient(${getColor()} 0% ${percentage}%, #f0f0f0 ${percentage}% 100%)`,\n      position: 'relative'\n    }}>\n      <div style={{\n        width: '80px',\n        height: '80px',\n        borderRadius: '50%',\n        background: '#fff',\n        display: 'flex',\n        alignItems: 'center',\n        justifyContent: 'center',\n        fontWeight: 'bold',\n        color: getColor(),\n        fontSize: '16px'\n      }}>\n        {value}{unit}\n      </div>\n      {isWarning && (\n        <div style={{\n          position: 'absolute',\n          top: '-10px',\n          right: '10px',\n          width: '20px',\n          height: '20px',\n          borderRadius: '50%',\n          background: '#ff4d4f',\n          animation: 'pulse 1s infinite'\n        }} />\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"display:flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid #ff4d4f;background:conic-gradient(#ff4d4f 0% 25%, #faad14 25% 50%, #52c41a 50% 75%, #1890ff 75% 100%);position:relative;\">\n        <div style=\"width:80px;height:80px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#ff4d4f;font-size:16px;\">\n          25°C\n        </div>\n        <div style=\"position:absolute;top:-10px;right:10px;width:20px;height:20px;border-radius:50%;background:#ff4d4f;\"></div>\n      </div>",
+    "metadata": {
+      "name": "温度计控件 (模拟)",
+      "description": "生成一个数字显示器，显示温度值，支持小数点",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "当前温度值",
+          "defaultValue": 25
+        },
+        {
+          "name": "minValue",
+          "type": "number",
+          "required": false,
+          "description": "最小值",
+          "defaultValue": 0
+        },
+        {
+          "name": "maxValue",
+          "type": "number",
+          "required": false,
+          "description": "最大值",
+          "defaultValue": 100
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false,
+          "description": "温度单位",
+          "defaultValue": "°C"
+        },
+        {
+          "name": "warningThreshold",
+          "type": "number",
+          "required": false,
+          "description": "警告阈值",
+          "defaultValue": 80
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "simple",
+      "estimatedTime": 2000
+    },
+    "id": "abb172f3-691e-4909-80bb-0deeed966d56",
+    "createdAt": "2025-07-14T08:02:29.715Z",
+    "updatedAt": "2025-07-14T08:02:29.715Z"
+  },
+  {
+    "description": "生成一个数字显示器，显示温度值，支持小数点",
+    "code": "import React from 'react';\n\ninterface ThermometerProps {\n  value: number;\n  minValue?: number;\n  maxValue?: number;\n  unit?: string;\n  warningThreshold?: number;\n}\n\nexport const Thermometer: React.FC<ThermometerProps> = ({\n  value,\n  minValue = 0,\n  maxValue = 100,\n  unit = '°C',\n  warningThreshold = 80\n}) => {\n  const percentage = Math.min(100, Math.max(0, ((value - minValue) / (maxValue - minValue)) * 100));\n  const isWarning = value >= warningThreshold;\n  \n  const getColor = () => {\n    if (isWarning) return '#ff4d4f';\n    if (percentage > 75) return '#faad14';\n    if (percentage > 50) return '#52c41a';\n    return '#1890ff';\n  };\n\n  return (\n    <div style={{\n      display: 'flex',\n      alignItems: 'center',\n      justifyContent: 'center',\n      width: '120px',\n      height: '120px',\n      borderRadius: '50%',\n      border: `4px solid ${getColor()}`,\n      background: `conic-gradient(${getColor()} 0% ${percentage}%, #f0f0f0 ${percentage}% 100%)`,\n      position: 'relative'\n    }}>\n      <div style={{\n        width: '80px',\n        height: '80px',\n        borderRadius: '50%',\n        background: '#fff',\n        display: 'flex',\n        alignItems: 'center',\n        justifyContent: 'center',\n        fontWeight: 'bold',\n        color: getColor(),\n        fontSize: '16px'\n      }}>\n        {value}{unit}\n      </div>\n      {isWarning && (\n        <div style={{\n          position: 'absolute',\n          top: '-10px',\n          right: '10px',\n          width: '20px',\n          height: '20px',\n          borderRadius: '50%',\n          background: '#ff4d4f',\n          animation: 'pulse 1s infinite'\n        }} />\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"display:flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid #ff4d4f;background:conic-gradient(#ff4d4f 0% 25%, #faad14 25% 50%, #52c41a 50% 75%, #1890ff 75% 100%);position:relative;\">\n        <div style=\"width:80px;height:80px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#ff4d4f;font-size:16px;\">\n          25°C\n        </div>\n        <div style=\"position:absolute;top:-10px;right:10px;width:20px;height:20px;border-radius:50%;background:#ff4d4f;\"></div>\n      </div>",
+    "metadata": {
+      "name": "温度计控件 (模拟)",
+      "description": "生成一个数字显示器，显示温度值，支持小数点",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "当前温度值",
+          "defaultValue": 25
+        },
+        {
+          "name": "minValue",
+          "type": "number",
+          "required": false,
+          "description": "最小值",
+          "defaultValue": 0
+        },
+        {
+          "name": "maxValue",
+          "type": "number",
+          "required": false,
+          "description": "最大值",
+          "defaultValue": 100
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false,
+          "description": "温度单位",
+          "defaultValue": "°C"
+        },
+        {
+          "name": "warningThreshold",
+          "type": "number",
+          "required": false,
+          "description": "警告阈值",
+          "defaultValue": 80
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "simple",
+      "estimatedTime": 2000
+    },
+    "id": "f1af6ef2-6582-4bd6-a3f3-40e13ea37307",
+    "createdAt": "2025-07-14T08:02:40.468Z",
+    "updatedAt": "2025-07-14T08:02:40.468Z"
+  },
+  {
+    "description": "设计一个线性进度条，显示0-100%的进度，带有动画效果",
+    "code": "import React from 'react';\n\ninterface ProgressBarProps {\n  percentage: number;\n  showText?: boolean;\n  animated?: boolean;\n  color?: string;\n}\n\nexport const ProgressBar: React.FC<ProgressBarProps> = ({\n  percentage,\n  showText = true,\n  animated = true,\n  color = '#1890ff'\n}) => {\n  const clampedPercentage = Math.min(100, Math.max(0, percentage));\n\n  return (\n    <div style={{ width: '250px', position: 'relative' }}>\n      <div style={{\n        width: '100%',\n        height: '24px',\n        background: '#f0f0f0',\n        borderRadius: '12px',\n        overflow: 'hidden',\n        boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)'\n      }}>\n        <div style={{\n          width: `${clampedPercentage}%`,\n          height: '100%',\n          background: `linear-gradient(90deg, ${color}, #52c41a)`,\n          borderRadius: '12px',\n          position: 'relative',\n          overflow: 'hidden',\n          transition: 'width 0.3s ease'\n        }}>\n          {animated && (\n            <div style={{\n              position: 'absolute',\n              top: 0,\n              left: 0,\n              width: '100%',\n              height: '100%',\n              background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',\n              animation: 'shimmer 2s infinite'\n            }} />\n          )}\n        </div>\n      </div>\n      {showText && (\n        <div style={{\n          position: 'absolute',\n          top: '50%',\n          left: '50%',\n          transform: 'translate(-50%, -50%)',\n          fontSize: '12px',\n          fontWeight: 'bold',\n          color: clampedPercentage > 50 ? '#fff' : '#333',\n          textShadow: clampedPercentage > 50 ? '0 1px 2px rgba(0,0,0,0.5)' : 'none'\n        }}>\n          {Math.round(clampedPercentage)}%\n        </div>\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"width:250px;position:relative;\">\n        <div style=\"width:100%;height:24px;background:#f0f0f0;border-radius:12px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);\">\n          <div style=\"width:65%;height:100%;background:linear-gradient(90deg,#1890ff,#52c41a);border-radius:12px;position:relative;overflow:hidden;\">\n            <div style=\"position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:shimmer 2s infinite;\"></div>\n          </div>\n        </div>\n        <div style=\"position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;font-weight:bold;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.5);\">65%</div>\n      </div>",
+    "metadata": {
+      "name": "进度条控件 (模拟)",
+      "description": "设计一个线性进度条，显示0-100%的进度，带有动画效果",
+      "props": [
+        {
+          "name": "percentage",
+          "type": "number",
+          "required": true,
+          "description": "进度百分比",
+          "defaultValue": 0
+        },
+        {
+          "name": "showText",
+          "type": "boolean",
+          "required": false,
+          "description": "显示百分比文字",
+          "defaultValue": true
+        },
+        {
+          "name": "animated",
+          "type": "boolean",
+          "required": false,
+          "description": "启用动画效果",
+          "defaultValue": true
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "required": false,
+          "description": "进度条颜色",
+          "defaultValue": "#1890ff"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "complex",
+      "estimatedTime": 2000
+    },
+    "id": "8fffd75c-4872-4a1e-944d-096e4149a060",
+    "createdAt": "2025-07-14T08:02:56.037Z",
+    "updatedAt": "2025-07-14T08:02:56.037Z"
+  },
+  {
+    "description": "Create a circular thermometer, display range 0-100°C, with red warning zone",
+    "code": "import React from 'react';\n\ninterface ThermometerProps {\n  value: number;\n  minValue?: number;\n  maxValue?: number;\n  unit?: string;\n  warningThreshold?: number;\n}\n\nexport const Thermometer: React.FC<ThermometerProps> = ({\n  value,\n  minValue = 0,\n  maxValue = 100,\n  unit = '°C',\n  warningThreshold = 80\n}) => {\n  const percentage = Math.min(100, Math.max(0, ((value - minValue) / (maxValue - minValue)) * 100));\n  const isWarning = value >= warningThreshold;\n  \n  const getColor = () => {\n    if (isWarning) return '#ff4d4f';\n    if (percentage > 75) return '#faad14';\n    if (percentage > 50) return '#52c41a';\n    return '#1890ff';\n  };\n\n  return (\n    <div style={{\n      display: 'flex',\n      alignItems: 'center',\n      justifyContent: 'center',\n      width: '120px',\n      height: '120px',\n      borderRadius: '50%',\n      border: `4px solid ${getColor()}`,\n      background: `conic-gradient(${getColor()} 0% ${percentage}%, #f0f0f0 ${percentage}% 100%)`,\n      position: 'relative'\n    }}>\n      <div style={{\n        width: '80px',\n        height: '80px',\n        borderRadius: '50%',\n        background: '#fff',\n        display: 'flex',\n        alignItems: 'center',\n        justifyContent: 'center',\n        fontWeight: 'bold',\n        color: getColor(),\n        fontSize: '16px'\n      }}>\n        {value}{unit}\n      </div>\n      {isWarning && (\n        <div style={{\n          position: 'absolute',\n          top: '-10px',\n          right: '10px',\n          width: '20px',\n          height: '20px',\n          borderRadius: '50%',\n          background: '#ff4d4f',\n          animation: 'pulse 1s infinite'\n        }} />\n      )}\n    </div>\n  );\n};",
+    "preview": "<div style=\"display:flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid #ff4d4f;background:conic-gradient(#ff4d4f 0% 25%, #faad14 25% 50%, #52c41a 50% 75%, #1890ff 75% 100%);position:relative;\">\n        <div style=\"width:80px;height:80px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#ff4d4f;font-size:16px;\">\n          25°C\n        </div>\n        <div style=\"position:absolute;top:-10px;right:10px;width:20px;height:20px;border-radius:50%;background:#ff4d4f;\"></div>\n      </div>",
+    "metadata": {
+      "name": "Thermometer Control (模拟)",
+      "description": "Create a circular thermometer, display range 0-100°C, with red warning zone",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "Current temperature value",
+          "defaultValue": 25
+        },
+        {
+          "name": "minValue",
+          "type": "number",
+          "required": false,
+          "description": "Minimum value",
+          "defaultValue": 0
+        },
+        {
+          "name": "maxValue",
+          "type": "number",
+          "required": false,
+          "description": "Maximum value",
+          "defaultValue": 100
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": false,
+          "description": "Temperature unit",
+          "defaultValue": "°C"
+        },
+        {
+          "name": "warningThreshold",
+          "type": "number",
+          "required": false,
+          "description": "Warning threshold",
+          "defaultValue": 80
+        }
+      ],
+      "dependencies": [
+        "react",
+        "@types/react"
+      ],
+      "complexity": "simple",
+      "estimatedTime": 2000
+    },
+    "id": "2960b8c5-a315-45c8-866b-fa44252cc239",
+    "createdAt": "2025-07-14T15:00:25.125Z",
+    "updatedAt": "2025-07-14T15:00:25.125Z"
+  }
+]

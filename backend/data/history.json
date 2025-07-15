@@ -1,0 +1,58 @@
+[
+  {
+    "description": "Create a circular thermometer, display range 0-100°C, with red warning zone",
+    "status": "success",
+    "id": "947e9cd1-6ebd-414a-9765-f758a5199588",
+    "createdAt": "2025-07-14T14:59:24.097Z",
+    "controlId": "8433885c-5f3e-4e36-bea3-b8628e4ca10e",
+    "completedAt": "2025-07-14T15:00:25.126Z"
+  },
+  {
+    "description": "设计一个线性进度条，显示0-100%的进度，带有动画效果",
+    "status": "success",
+    "id": "c82971d1-acab-436b-88f9-bfd46b7f6d9d",
+    "createdAt": "2025-07-14T08:02:55.931Z",
+    "controlId": "8794d5b1-761c-417b-845e-bb8b324867c0",
+    "completedAt": "2025-07-14T08:02:56.038Z"
+  },
+  {
+    "description": "生成一个数字显示器，显示温度值，支持小数点",
+    "status": "success",
+    "id": "398852af-e37d-4df0-acbc-99625a793311",
+    "createdAt": "2025-07-14T08:02:40.353Z",
+    "controlId": "f47c605d-0242-4ee9-b0c6-341884e3a8b9",
+    "completedAt": "2025-07-14T08:02:40.468Z"
+  },
+  {
+    "description": "生成一个数字显示器，显示温度值，支持小数点",
+    "status": "success",
+    "id": "65ef94af-83fa-42dd-a520-3b582f4785f8",
+    "createdAt": "2025-07-14T08:02:29.396Z",
+    "controlId": "55447799-6943-44a5-8e82-e9f02e072814",
+    "completedAt": "2025-07-14T08:02:29.716Z"
+  },
+  {
+    "description": "生成一个数字显示器，显示温度值，支持小数点",
+    "status": "success",
+    "id": "2028b1e2-b06f-4153-8fb2-124c4fe1c16c",
+    "createdAt": "2025-07-14T07:36:08.629Z",
+    "controlId": "863c9033-3bb4-4352-b343-f27b3d246d8c",
+    "completedAt": "2025-07-14T07:36:13.166Z"
+  },
+  {
+    "description": "制作一个LED指示灯阵列，8x8矩阵，支持颜色切换",
+    "status": "success",
+    "id": "2ac3980c-d1ab-4b0d-9824-358fb9f04916",
+    "createdAt": "2025-07-14T07:35:45.009Z",
+    "controlId": "cea96932-ddb4-492d-ae15-ffb91f33f1b6",
+    "completedAt": "2025-07-14T07:35:47.240Z"
+  },
+  {
+    "description": "创建一个圆形温度计，显示范围0-100°C，带有红色警告区域",
+    "status": "success",
+    "id": "89a1bc71-c9be-4354-beab-5bfa7ef7d018",
+    "createdAt": "2025-07-14T07:28:10.200Z",
+    "controlId": "fe4a7e60-0817-4bea-8fb8-029a695b1f9a",
+    "completedAt": "2025-07-14T07:28:13.879Z"
+  }
+]
