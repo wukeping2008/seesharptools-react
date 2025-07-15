@@ -52,7 +52,17 @@ A modern web-based test and measurement control platform built with React 18 + T
    cd backend && npm install
    ```
 
-3. **Start development servers**
+3. **Configure environment variables**
+   ```bash
+   # Copy environment template
+   cd backend
+   cp .env.example .env
+   
+   # Edit .env file and add your API keys
+   # VOLCES_DEEPSEEK_API_KEY=your_actual_api_key_here
+   ```
+
+4. **Start development servers**
    ```bash
    # Start frontend (Port 3002)
    npm run dev
@@ -61,7 +71,7 @@ A modern web-based test and measurement control platform built with React 18 + T
    cd backend && npm run dev
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to `http://localhost:3002`
 
 ## 📁 Project Structure
