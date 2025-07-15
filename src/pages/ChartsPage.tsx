@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Row, Col, Select, Switch, Slider, ColorPicker, Typography } from 'antd'
-import { EasyChart, StripChart } from '../components/charts'
+import { EasyChart, StripChart, WebGLChart } from '../components/charts'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
@@ -9,7 +9,7 @@ const { Option } = Select
 
 const PageContainer = styled.div`
   padding: 24px;
-  background: #f5f5f5;
+  background: ${props => props.theme.mode === 'dark' ? '#141414' : '#f5f5f5'};
   min-height: 100vh;
 `
 
@@ -38,6 +38,7 @@ const ControlRow = styled.div`
   .control-label {
     min-width: 100px;
     font-weight: 500;
+    color: ${props => props.theme.mode === 'dark' ? '#ffffff' : 'inherit'};
   }
 `
 
@@ -261,6 +262,12 @@ export const ChartsPage: React.FC = () => {
                 console.log('StripChart数据更新:', data.length, '个数据点')
               }}
             />
+          </ChartCard>
+        </Col>
+        
+        <Col span={24}>
+          <ChartCard title={t('charts.webglChart', 'WebGL高性能图表')}>
+            <WebGLChart width={800} height={400} />
           </ChartCard>
         </Col>
       </Row>

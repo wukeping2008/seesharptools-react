@@ -14,11 +14,11 @@ export const SimpleAIGenerator: React.FC = () => {
       fontSize: '18px',
       color: theme === 'dark' ? '#fff' : '#000'
     }}>
-      <h1>{t('aiGenerator.title')}</h1>
-      <p>{t('aiGenerator.subtitle')}</p>
+      <h1 style={{ color: theme === 'dark' ? '#fff' : 'inherit' }}>{t('aiGenerator.title')}</h1>
+      <p style={{ color: theme === 'dark' ? 'rgba(255, 255, 255, 0.85)' : 'inherit' }}>{t('aiGenerator.subtitle')}</p>
       
       <div style={{ marginTop: '32px' }}>
-        <h2>{t('aiGenerator.features.title')}</h2>
+        <h2 style={{ color: theme === 'dark' ? '#fff' : 'inherit' }}>{t('aiGenerator.features.title')}</h2>
         <ul>
           <li>{t('aiGenerator.features.naturalLanguage')}</li>
           <li>{t('aiGenerator.features.smartGeneration')}</li>
@@ -28,7 +28,7 @@ export const SimpleAIGenerator: React.FC = () => {
       </div>
       
       <div style={{ marginTop: '32px' }}>
-        <h2>{t('aiGenerator.examples.title')}</h2>
+        <h2 style={{ color: theme === 'dark' ? '#fff' : 'inherit' }}>{t('aiGenerator.examples.title')}</h2>
         <ul>
           <li>{t('aiGenerator.examples.thermometer')}</li>
           <li>{t('aiGenerator.examples.progressBar')}</li>

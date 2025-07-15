@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Typography, Card, Row, Col, Space, Divider, Switch, Slider, InputNumber } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { useAppStore } from '@/stores/useAppStore'
 import { SimpleButton, SimpleLEDIndicator, SimpleCircularGauge } from '@/components/simple'
 
 const { Title, Paragraph } = Typography
 
 export const ComponentsPage: React.FC = () => {
   const { t } = useTranslation()
+  const { theme } = useAppStore()
   
   // 控件状态
   const [ledStates, setLedStates] = useState({
@@ -49,9 +51,13 @@ export const ComponentsPage: React.FC = () => {
   }
 
   return (
-    <div style={{ padding: '24px', background: '#f5f5f5', minHeight: '100vh' }}>
-      <Title level={2}>{t('components.title')}</Title>
-      <Paragraph>
+    <div style={{ 
+      padding: '24px', 
+      background: theme === 'dark' ? '#141414' : '#f5f5f5', 
+      minHeight: '100vh' 
+    }}>
+      <Title level={2} style={{ color: theme === 'dark' ? '#fff' : 'inherit' }}>{t('components.title')}</Title>
+      <Paragraph style={{ color: theme === 'dark' ? 'rgba(255, 255, 255, 0.85)' : 'inherit' }}>
         {t('components.subtitle')}
       </Paragraph>
 

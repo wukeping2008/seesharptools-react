@@ -48,6 +48,20 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.85) !important' : 'inherit'};
   }
 
+  /* 确保所有文本在深色模式下可见 */
+  .ant-statistic-title {
+    color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.85) !important' : 'inherit'};
+  }
+
+  .ant-statistic-content {
+    color: ${props => props.theme.mode === 'dark' ? '#ffffff !important' : 'inherit'};
+  }
+
+  /* 修复深色模式下的文本对比度 */
+  .ant-typography.ant-typography-secondary {
+    color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.65) !important' : 'inherit'};
+  }
+
   #root {
     height: 100%;
   }

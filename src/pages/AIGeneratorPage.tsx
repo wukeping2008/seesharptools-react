@@ -182,11 +182,11 @@ export const AIGeneratorPage: React.FC = () => {
     <PageContainer $isDark={isDark}>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <Title level={2}>
+          <Title level={2} style={{ color: isDark ? '#fff' : 'inherit' }}>
             <RobotOutlined style={{ marginRight: 8 }} />
             {t('aiGenerator.title')}
           </Title>
-          <Paragraph>{t('aiGenerator.subtitle')}</Paragraph>
+          <Paragraph style={{ color: isDark ? 'rgba(255, 255, 255, 0.85)' : 'inherit' }}>{t('aiGenerator.subtitle')}</Paragraph>
         </Col>
 
         <Col span={24}>

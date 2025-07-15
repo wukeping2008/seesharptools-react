@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, Card, Row, Col, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useAppStore } from '@/stores/useAppStore'
 import {
   ExperimentOutlined,
   BarChartOutlined,
@@ -14,6 +15,7 @@ const { Title, Paragraph } = Typography
 export const HomePage: React.FC = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const { theme } = useAppStore()
 
   const features = [
     {
@@ -43,13 +45,23 @@ export const HomePage: React.FC = () => {
   ]
 
   return (
-    <div style={{ padding: '24px', background: '#fff', minHeight: '100vh' }}>
+    <div style={{ 
+      padding: '24px', 
+      background: theme === 'dark' ? '#141414' : '#fff', 
+      minHeight: '100vh' 
+    }}>
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-        <Title level={1}>{t('home.title')}</Title>
-        <Paragraph style={{ fontSize: '18px', color: '#666' }}>
+        <Title level={1} style={{ color: theme === 'dark' ? '#fff' : 'inherit' }}>{t('home.title')}</Title>
+        <Paragraph style={{ 
+          fontSize: '18px', 
+          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.85)' : '#666' 
+        }}>
           {t('home.subtitle')}
         </Paragraph>
-        <Paragraph style={{ fontSize: '16px' }}>
+        <Paragraph style={{ 
+          fontSize: '16px',
+          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.85)' : 'inherit'
+        }}>
           {t('home.description')}{t('common.aiGenerator') === 'AI Generator' ? ', providing rich professional measurement and control components, supporting AI generation and visual development' : '，提供丰富的专业测控控件，支持AI生成和可视化开发'}
         </Paragraph>
       </div>
@@ -65,7 +77,10 @@ export const HomePage: React.FC = () => {
             >
               <div style={{ marginBottom: '16px' }}>{feature.icon}</div>
               <Title level={4}>{feature.title}</Title>
-              <Paragraph style={{ color: '#666', marginBottom: '24px' }}>
+              <Paragraph style={{ 
+                color: theme === 'dark' ? 'rgba(255, 255, 255, 0.65)' : '#666', 
+                marginBottom: '24px' 
+              }}>
                 {feature.description}
               </Paragraph>
               <Button type="primary" size="large">
@@ -77,7 +92,7 @@ export const HomePage: React.FC = () => {
       </Row>
 
       <div style={{ marginTop: '64px', textAlign: 'center' }}>
-        <Title level={3}>{t('home.techFeatures.title')}</Title>
+        <Title level={3} style={{ color: theme === 'dark' ? '#fff' : 'inherit' }}>{t('home.techFeatures.title')}</Title>
         <Row gutter={[24, 24]} style={{ marginTop: '32px' }}>
           <Col xs={24} md={8}>
             <Card>

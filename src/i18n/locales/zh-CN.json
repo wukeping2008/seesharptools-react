@@ -13,7 +13,10 @@
     "chinese": "中文",
     "english": "English",
     "developing": "功能开发中...",
-    "close": "关闭"
+    "close": "关闭",
+    "play": "播放",
+    "pause": "暂停",
+    "clear": "清除"
   },
   "home": {
     "title": "SeeSharpTools React",
@@ -161,7 +164,26 @@
     "value": "数值",
     "stripChart": "StripChart 实时数据监控",
     "stripChartTitle": "实时数据监控",
-    "sensorValue": "数值"
+    "sensorValue": "数值",
+    "webglChart": "WebGL高性能图表",
+    "waveType": "波形类型",
+    "sine": "正弦波",
+    "cosine": "余弦波",
+    "square": "方波",
+    "sawtooth": "锯齿波",
+    "dataPoints": "数据点数",
+    "frequency": "频率",
+    "amplitude": "振幅",
+    "speed": "速度",
+    "lineWidth": "线宽",
+    "showPoints": "显示点",
+    "performance": {
+      "fps": "帧率",
+      "renderTime": "渲染时间",
+      "dataPoints": "数据点数",
+      "memoryUsage": "内存使用",
+      "tips": "性能提示：FPS > 50 为优秀，30-50 为良好，< 30 需要优化。WebGL硬件加速可以处理大数据集。"
+    }
   },
   "enhancedCharts": {
     "title": "增强版图表系统演示",

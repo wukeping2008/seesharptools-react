@@ -13,7 +13,10 @@
     "chinese": "中文",
     "english": "English",
     "developing": "Under Development...",
-    "close": "Close"
+    "close": "Close",
+    "play": "Play",
+    "pause": "Pause",
+    "clear": "Clear"
   },
   "home": {
     "title": "SeeSharpTools React",
@@ -161,7 +164,26 @@
     "value": "Value",
     "stripChart": "StripChart Real-time Data Monitor",
     "stripChartTitle": "Real-time Data Monitor",
-    "sensorValue": "Value"
+    "sensorValue": "Value",
+    "webglChart": "WebGL High-Performance Chart",
+    "waveType": "Wave Type",
+    "sine": "Sine Wave",
+    "cosine": "Cosine Wave",
+    "square": "Square Wave",
+    "sawtooth": "Sawtooth Wave",
+    "dataPoints": "Data Points",
+    "frequency": "Frequency",
+    "amplitude": "Amplitude",
+    "speed": "Speed",
+    "lineWidth": "Line Width",
+    "showPoints": "Show Points",
+    "performance": {
+      "fps": "Frame Rate",
+      "renderTime": "Render Time",
+      "dataPoints": "Data Points",
+      "memoryUsage": "Memory Usage",
+      "tips": "Performance Tips: FPS > 50 is excellent, 30-50 is good, < 30 needs optimization. WebGL hardware acceleration can handle large datasets."
+    }
   },
   "enhancedCharts": {
     "title": "Advanced Charting System",

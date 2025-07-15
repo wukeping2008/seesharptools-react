@@ -7,10 +7,12 @@ const PageContainer = styled.div`
   padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
+  background: ${props => props.theme.mode === 'dark' ? '#141414' : '#ffffff'};
+  min-height: 100vh;
 `
 
 const Title = styled.h1`
-  color: #333;
+  color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#333'};
   margin-bottom: 24px;
   text-align: center;
 `
@@ -18,13 +20,14 @@ const Title = styled.h1`
 const Section = styled.div`
   margin-bottom: 32px;
   padding: 24px;
-  background: #fff;
+  background: ${props => props.theme.mode === 'dark' ? '#1f1f1f' : '#fff'};
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+  border: 1px solid ${props => props.theme.mode === 'dark' ? '#434343' : 'transparent'};
 `
 
 const SectionTitle = styled.h2`
-  color: #333;
+  color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#333'};
   margin-bottom: 16px;
   font-size: 20px;
 `
@@ -46,14 +49,15 @@ const ControlGroup = styled.div`
 const Label = styled.label`
   font-size: 14px;
   font-weight: 500;
-  color: #333;
+  color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#333'};
 `
 
 const Select = styled.select`
   padding: 8px 12px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid ${props => props.theme.mode === 'dark' ? '#434343' : '#d9d9d9'};
   border-radius: 4px;
-  background: white;
+  background: ${props => props.theme.mode === 'dark' ? '#262626' : 'white'};
+  color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#000000'};
   font-size: 14px;
   min-width: 120px;
 `
@@ -85,22 +89,22 @@ const ChartGrid = styled.div`
 `
 
 const ChartCard = styled.div`
-  border: 1px solid #e8e8e8;
+  border: 1px solid ${props => props.theme.mode === 'dark' ? '#434343' : '#e8e8e8'};
   border-radius: 8px;
   overflow: hidden;
-  background: white;
+  background: ${props => props.theme.mode === 'dark' ? '#262626' : 'white'};
 `
 
 const ChartHeader = styled.div`
   padding: 16px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #e8e8e8;
+  background: ${props => props.theme.mode === 'dark' ? '#1a1a1a' : '#f5f5f5'};
+  border-bottom: 1px solid ${props => props.theme.mode === 'dark' ? '#434343' : '#e8e8e8'};
   font-weight: 500;
-  color: #333;
+  color: ${props => props.theme.mode === 'dark' ? '#ffffff' : '#333'};
 `
 
 const Description = styled.p`
-  color: #666;
+  color: ${props => props.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.85)' : '#666'};
   line-height: 1.6;
   margin-bottom: 16px;
 `

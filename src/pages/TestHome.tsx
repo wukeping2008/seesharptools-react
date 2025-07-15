@@ -1,13 +1,16 @@
 import React from 'react'
+import { useAppStore } from '@/stores/useAppStore'
 
 export const TestHome: React.FC = () => {
+  const { theme } = useAppStore()
+  
   return (
     <div style={{ 
       padding: '24px', 
-      background: '#fff', 
+      background: theme === 'dark' ? '#141414' : '#fff', 
       minHeight: '100vh',
       fontSize: '24px',
-      color: '#000'
+      color: theme === 'dark' ? '#ffffff' : '#000'
     }}>
       <h1>测试主页</h1>
       <p>如果你能看到这个页面，说明React应用正常工作！</p>
