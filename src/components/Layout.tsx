@@ -12,6 +12,7 @@ import {
   BarChartOutlined,
   BulbOutlined,
   GlobalOutlined,
+  FundOutlined,
 } from '@ant-design/icons'
 import { useAppStore } from '@stores/useAppStore'
 
@@ -54,6 +55,11 @@ export const Layout: React.FC = () => {
       key: '/enhanced-charts',
       icon: <BarChartOutlined />,
       label: t('common.enhancedCharts'),
+    },
+    {
+      key: '/professional-instruments',
+      icon: <FundOutlined />,
+      label: t('common.professionalInstruments'),
     },
   ]
 
